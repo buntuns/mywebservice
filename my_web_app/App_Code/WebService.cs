@@ -31,6 +31,95 @@ public class WebService : System.Web.Services.WebService
         public double temperature;
         public double humidity;
     }
+    public class Customerdata
+    {
+        public string name;
+        public string address;
+        public string weight;
+       
+    }
+    public class MyData
+    {
+        public string name;
+        public string number;
+        public string hobby;
+        public string sport;
+        public string sport2;
+    }
+
+    [WebMethod]
+    public string Add_to_store(string name, string address, string weight)
+    {
+        
+            XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/cutomer.xml");
+            xml.Add(new XElement("information",
+                new XElement("name", name),
+                new XElement("address", address),
+                new XElement("weight", weight),
+             ));
+            xml.Save(AppDomain.CurrentDomain.BaseDirectory + "/customer.xml");
+            return "your information " + name + " " + address + " " + weight;
+        
+
+    }
+
+    public string check_stroe(string check)
+    {
+        XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/cutomer.xml");
+        if ()
+        {
+
+        }
+    }
+    [WebMethod]
+    public string show_all_store()
+        {
+            XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/customer.xml");
+            IEnumerable<XElement> show_all =
+               from el in xml.Elements()
+               select el;
+
+            Customerdata[] test = new Customerdata[show_all.Count()];
+
+            int i = 0;
+            foreach (XElement el in show_all)
+            {
+                test[i] = new Customerdata()
+                {
+                    name = (string)el.Element("name"),
+                    address = (string)el.Element("address"),
+                    weight = (double)el.Element("weight"),
+                  
+                };
+                i++;
+            }
+            return test;
+        }
+    [WebMethod]
+    public string show_my_data()
+    {
+        XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/mydata.xml");
+        IEnumerable<XElement> show_all =
+           from el in xml.Elements()
+           select el;
+
+        MyData[] test = new MyData[show_all.Count()];
+
+        int i = 0;
+        foreach (XElement el in show_all)
+        {
+            test[i] = new MyData()
+            {
+                name = (string)el.Element("name"),
+                number = (string)el.Element("number"),
+                hobby = (string)el.Element("hobby"),
+                sport = (string)el.Element("sport"),
+                sport2 = (string)el.Element("sport2"),
+            };
+            i++;
+        }
+        return test;
+    }
 
     [WebMethod] // use this to declaer method on web service.
     public string HelloWorld()
@@ -74,4 +163,6 @@ public class WebService : System.Web.Services.WebService
         }
         return test;
     }
+    
+
 }
