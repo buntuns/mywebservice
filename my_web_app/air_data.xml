@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<air_condition>
+  <Airdata>
+    <Room>818</Room>
+    <Temperature>1</Temperature>
+    <Humidity>1</Humidity>
+    <Time>1</Time>
+  </Airdata>
+  <Airdata>
+    <Room>506</Room>
+    <Temperature>1</Temperature>
+    <Humidity>2</Humidity>
+    <Time>3</Time>
+  </Airdata>
+</air_condition>
