@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Ling;
 using System.Xml.Linq;
 using System.Web;
 using System.Web.Services;
@@ -15,6 +15,7 @@ using System.Globalization;
 // [System.Web.Script.Services.ScriptService]
 public class WebService : System.Web.Services.WebService
 {
+    public object XElement { get; private set; }
 
     public WebService()
     {
@@ -37,17 +38,17 @@ public class WebService : System.Web.Services.WebService
         return "Hello World";
     } //edit this function to modify web service
     [WebMethod]
-    public string Add_data(string room, string temp , string humidity, string time )
+    public string Add_data(string room, string temp, string humidity, string time)
     {
         XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/air_data.xml");
         xml.Add(new XElement("Airdata",
             new XElement("Room", room),
-            new XElement("Temperature" , temp),
+            new XElement("Temperature", temp),
             new XElement("Humidity", humidity),
             new XElement("Time", time)
          ));
-        xml.Save(AppDomain.CurrentDomain.BaseDirectory + "/air_data.xml"); 
-        return room+" "+temp + " " + humidity + " " + time;
+        xml.Save(AppDomain.CurrentDomain.BaseDirectory + "/air_data.xml");
+        return room + " " + temp + " " + humidity + " " + time;
     }
     [WebMethod]
     public AirData[] Show_data()
