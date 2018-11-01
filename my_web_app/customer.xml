@@ -1,3 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <customers>
+  <information>
+    <name>q</name>
+    <address>123</address>
+    <weight>12</weight>
+  </information>
+  <information>
+    <name>buntun</name>
+    <address>12345</address>
+    <weight>20</weight>
+  </information>
+  <information>
+    <name>wat</name>
+    <address>3345</address>
+    <weight>45</weight>
+  </information>
 </customers>

@@ -12,4 +12,10 @@
     <Humidity>2</Humidity>
     <Time>3</Time>
   </Airdata>
+  <Airdata>
+    <Room>506-B</Room>
+    <Temperature>12</Temperature>
+    <Humidity>1</Humidity>
+    <Time>3</Time>
+  </Airdata>
 </air_condition>

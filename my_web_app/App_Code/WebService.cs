@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Ling;
+using System.Linq;
 using System.Xml.Linq;
 using System.Web;
 using System.Web.Services;
@@ -15,7 +15,6 @@ using System.Globalization;
 // [System.Web.Script.Services.ScriptService]
 public class WebService : System.Web.Services.WebService
 {
-    public object XElement { get; private set; }
 
     public WebService()
     {
@@ -47,32 +46,55 @@ public class WebService : System.Web.Services.WebService
         public string sport2;
     }
 
+    public class MyDatas
+    {
+        public string name;
+        public string id;
+        public string[] hobby = new string[2];
+        public string[] sport = new string[2];
+
+        public MyDatas()
+        {
+            name = "Bunyagorn chatasing";
+            id = "5801012630114";
+            hobby[0] = "Reading";
+            hobby[1] = "Play Games";
+            sport[0] = "football";
+            sport[1] = "chess";
+        }
+    }
+
+    [WebMethod]
+    public MyDatas Mydata()
+    {
+        MyDatas datas = new MyDatas();
+        return datas;
+
+    }
+
     [WebMethod]
     public string Add_to_store(string name, string address, string weight)
     {
-        
-            XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/cutomer.xml");
+            XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/customer.xml");
             xml.Add(new XElement("information",
                 new XElement("name", name),
                 new XElement("address", address),
-                new XElement("weight", weight),
+                new XElement("weight", weight)
              ));
             xml.Save(AppDomain.CurrentDomain.BaseDirectory + "/customer.xml");
-            return "your information " + name + " " + address + " " + weight;
+            return "Thank you " + name;
         
 
     }
 
-    public string check_stroe(string check)
-    {
-        XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/cutomer.xml");
-        if ()
-        {
+    //public string check_stroe(string check)
+   // {
+    //    XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/cutomer.xml");
+   // }
 
-        }
-    }
+
     [WebMethod]
-    public string show_all_store()
+    public Customerdata[] show_all_store()
         {
             XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/customer.xml");
             IEnumerable<XElement> show_all =
@@ -88,44 +110,23 @@ public class WebService : System.Web.Services.WebService
                 {
                     name = (string)el.Element("name"),
                     address = (string)el.Element("address"),
-                    weight = (double)el.Element("weight"),
+                    weight = (string)el.Element("weight"),
                   
                 };
                 i++;
             }
             return test;
         }
-    [WebMethod]
-    public string show_my_data()
-    {
-        XElement xml = XElement.Load(AppDomain.CurrentDomain.BaseDirectory + "/mydata.xml");
-        IEnumerable<XElement> show_all =
-           from el in xml.Elements()
-           select el;
+   
 
-        MyData[] test = new MyData[show_all.Count()];
-
-        int i = 0;
-        foreach (XElement el in show_all)
-        {
-            test[i] = new MyData()
-            {
-                name = (string)el.Element("name"),
-                number = (string)el.Element("number"),
-                hobby = (string)el.Element("hobby"),
-                sport = (string)el.Element("sport"),
-                sport2 = (string)el.Element("sport2"),
-            };
-            i++;
-        }
-        return test;
-    }
 
     [WebMethod] // use this to declaer method on web service.
     public string HelloWorld()
     {
         return "Hello World";
     } //edit this function to modify web service
+
+
     [WebMethod]
     public string Add_data(string room, string temp, string humidity, string time)
     {
@@ -139,6 +140,9 @@ public class WebService : System.Web.Services.WebService
         xml.Save(AppDomain.CurrentDomain.BaseDirectory + "/air_data.xml");
         return room + " " + temp + " " + humidity + " " + time;
     }
+
+
+
     [WebMethod]
     public AirData[] Show_data()
     {
@@ -163,6 +167,8 @@ public class WebService : System.Web.Services.WebService
         }
         return test;
     }
-    
+
+
+   
 
 }
