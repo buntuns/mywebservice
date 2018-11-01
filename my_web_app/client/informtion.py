@@ -1,6 +1,6 @@
 from zeep import Client
 
-client = Client('http://localhost:54368/WebService.asmx?WSDL')
+client = Client('https://buntun.azurewebsites.net/WebService.asmx')
 print('Enter your information')
 print('Your name :')
 name = input()

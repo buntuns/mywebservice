@@ -1,6 +1,6 @@
 from zeep import Client
 
-client = Client('http://localhost:54368/WebService.asmx?WSDL')
+client = Client('https://buntun.azurewebsites.net/WebService.asmx')
 print('Enter Data')
 print('Room :')
 room = input()
@@ -13,5 +13,5 @@ time = input()
 ##print(room , temp, humidity , time)
 print(client.service.Add_data(room , temp, humidity , time))
 
-client = zeep.Client('http://localhost:54368/WebService.asmx?WSDL')
+client = zeep.Client('https://buntun.azurewebsites.net/WebService.asmx')
 print(client.service.show_data())
